@@ -3,14 +3,9 @@ import { Link, NavLink } from 'react-router-dom'
 import { Sun, Moon, Menu, X } from 'lucide-react'
 import { NAV_LINKS } from '../data'
 
-// Import logos (choose one method)
-// Method 1: Import from src/assets
+// Import logos
 import logoLight from '/public/img/Trendeveblack.png'
 import logoDark from '/public/img/TrendeveWhite.png'
-
-// Method 2: If logos are in public folder
-// const logoLight = '/images/logo-light.png'
-// const logoDark = '/images/logo-dark.png'
 
 export default function Navbar({ dark, setDark }) {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -73,7 +68,6 @@ export default function Navbar({ dark, setDark }) {
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center gap-3">
-
             {/* Theme toggle */}
             <button
               onClick={() => setDark(!dark)}
@@ -107,24 +101,39 @@ export default function Navbar({ dark, setDark }) {
             </Link>
           </div>
 
-          {/* Mobile Toggle */}
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden p-2"
-          >
-            {menuOpen ? (
-              <X size={22} className={dark ? 'text-white' : 'text-zinc-800'} />
-            ) : (
-              <Menu size={22} className={dark ? 'text-white' : 'text-zinc-800'} />
-            )}
-          </button>
+          {/* Mobile Actions - Theme toggle and menu button */}
+          <div className="flex md:hidden items-center gap-2">
+            {/* Theme toggle for mobile */}
+            <button
+              onClick={() => setDark(!dark)}
+              className={`w-9 h-9 flex items-center justify-center rounded-lg border transition ${
+                dark
+                  ? 'border-white/10 text-white hover:bg-white/10'
+                  : 'border-zinc-200 text-zinc-700 hover:bg-zinc-100'
+              }`}
+            >
+              {dark ? <Sun size={16} /> : <Moon size={16} />}
+            </button>
+
+            {/* Menu Toggle */}
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="p-2"
+            >
+              {menuOpen ? (
+                <X size={22} className={dark ? 'text-white' : 'text-zinc-800'} />
+              ) : (
+                <Menu size={22} className={dark ? 'text-white' : 'text-zinc-800'} />
+              )}
+            </button>
+          </div>
         </div>
       </nav>
 
       {/* Mobile Menu */}
       {menuOpen && (
         <div
-          className={`fixed inset-0 top-16 z-40 px-5 py-6 flex flex-col gap-4 ${
+          className={`fixed inset-0 top-16 z-40 px-5 py-6 flex flex-col gap-4 overflow-y-auto ${
             dark ? 'bg-[#073936]' : 'bg-white'
           }`}
         >
