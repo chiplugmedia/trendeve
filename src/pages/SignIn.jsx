@@ -41,7 +41,7 @@ export default function SignIn({ dark }) {
       if (form.email === 'wrong@example.com') {
         setAuthErr('Invalid email or password. Please try again.')
       } else {
-        navigate('/')
+        navigate('/dashboard')
       }
     }, 1500)
   }

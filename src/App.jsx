@@ -9,21 +9,23 @@ import Pricing  from './pages/Pricing'
 import API      from './pages/API'
 import SignUp   from './pages/SignUp'
 import SignIn   from './pages/SignIn'
+import Dashboard from './pages/Dashboard'
 
 // Pages that render their own full-screen layout (no shared chrome)
-const AUTH_ROUTES = ['/signup', '/signin']
+const STANDALONE_ROUTES = ['/signup', '/signin', '/dashboard']
 
 export default function App() {
   const [dark, setDark] = useState(true)
   const { pathname } = useLocation()
-  const isAuth = AUTH_ROUTES.includes(pathname)
+  const isStandalone = STANDALONE_ROUTES.includes(pathname)
 
-  // Auth pages: render standalone (own background, no nav/footer)
-  if (isAuth) {
+  // Auth and dashboard pages: render standalone (own background, no nav/footer)
+  if (isStandalone) {
     return (
       <Routes>
         <Route path="/signup" element={<SignUp dark={dark} />} />
         <Route path="/signin" element={<SignIn dark={dark} />} />
+        <Route path="/dashboard" element={<Dashboard dark={dark} />} />
       </Routes>
     )
   }

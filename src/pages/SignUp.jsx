@@ -43,7 +43,7 @@ export default function SignUp({ dark }) {
     if (Object.keys(errs).length) { setErrors(errs); return }
     setErrors({})
     setLoading(true)
-    setTimeout(() => { setLoading(false); navigate('/') }, 1800)
+    setTimeout(() => { setLoading(false); navigate('/dashboard') }, 1800)
   }
 
   // Password strength
